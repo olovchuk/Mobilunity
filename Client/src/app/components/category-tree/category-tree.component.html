@@ -20,3 +20,8 @@
     </div>
   </mat-nested-tree-node>
 </mat-tree>
+
+<hr>
+
+<button (click)=" isExpandedAll = !isExpandedAll;">{{ isExpandedAll ? "Hide all" : "Expand All" }}</button>
+<app-category-tree-node [Data]="this.dataSource.data" [isExpandedAll]="isExpandedAll"></app-category-tree-node>

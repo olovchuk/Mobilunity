@@ -5,7 +5,8 @@ import {MatTreeModule, MatTreeNestedDataSource} from "@angular/material/tree";
 import {NestedTreeControl} from "@angular/cdk/tree";
 import {MatIconModule} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
+import {CategoryTreeNodeComponent} from "./category-tree-node/category-tree-node.component";
 
 @Component({
   selector: 'app-category-tree',
@@ -16,6 +17,8 @@ import {NgIf} from "@angular/common";
     MatTreeModule,
     MatIconModule,
     NgIf,
+    NgForOf,
+    CategoryTreeNodeComponent
   ],
   styleUrl: './category-tree.component.scss'
 })
@@ -23,6 +26,7 @@ export class CategoryTreeComponent implements OnInit {
   isErrorLoad = true;
   treeControl: NestedTreeControl<CategoryNode>;
   dataSource: MatTreeNestedDataSource<CategoryNode>;
+  isExpandedAll: boolean = false;
 
   constructor(private categoryService: CategoryService) {
     this.treeControl = new NestedTreeControl<CategoryNode>(node => node.children);
@@ -52,7 +56,7 @@ export class CategoryTreeComponent implements OnInit {
   }
 }
 
-interface CategoryNode {
+export interface CategoryNode {
   categoryId: number;
   categoryName: string;
   children?: CategoryNode[];

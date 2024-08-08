@@ -1,0 +1,17 @@
+<div *ngFor="let value of data">
+  <div style="display: flex; align-items: center; align-content: center; text-align: center">
+    <button *ngIf="value.children != undefined && value.children.length > 0"
+            (click)="toggleShowChild(value.categoryId)" mat-icon-button>
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{ isExpanded(value.categoryId) ? 'expand_more' : 'chevron_right' }}
+      </mat-icon>
+    </button>
+    <span style="text-align: center" [ngStyle]="{'margin-left' : value.children == undefined || value.children.length == 0 ? ' 30px' :''}">
+      {{ value.categoryName }}
+    </span>
+  </div>
+  <div style="margin-left: 30px" *ngIf="isExpanded(value.categoryId)">
+    <app-category-tree-node #childNodes [Data]="value.children"
+                            [isExpandedAll]="isExpandedAll"></app-category-tree-node>
+  </div>
+</div>
